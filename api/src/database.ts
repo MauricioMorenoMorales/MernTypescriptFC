@@ -1,14 +1,19 @@
 import mongoose, { ConnectionOptions } from 'mongoose'
+import config from './config'
 ;(async () => {
-	const mongooseOptions: ConnectionOptions = {
-		useUnifiedTopology: true,
-		useNewUrlParser: true,
+	try {
+		const mongooseOptions: ConnectionOptions = {
+			useUnifiedTopology: true,
+			useNewUrlParser: true,
+		}
+		const db = await mongoose.connect(
+			`mongodb+srv://${config.MONGO_USERNAME}:${config.MONGO_PASSWORD}@nodejsplatzi.cg57m.mongodb.net/${config.MONGO_DATABASE}?retryWrites=true&w=majority`,
+			mongooseOptions,
+			() => {
+				console.log(`[Database] Base de datos conectada`)
+			},
+		)
+	} catch (err) {
+		console.error(err)
 	}
-	await mongoose.connect(
-		'mongodb+srv://db_user_otro:12345@nodejsplatzi.cg57m.mongodb.net/merntypescript?retryWrites=true&w=majority',
-		mongooseOptions,
-		() => {
-			console.log('[database] Base de datos conectada')
-		},
-	)
 })()
