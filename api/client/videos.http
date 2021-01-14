@@ -4,19 +4,27 @@
 GET {{api}}/videos
 
 ###
-GET {{api}}/videos/1
+GET {{api}}/videos/600064f249ade132e2e5e53e
 
 ###
-DELETE {{api}}/videos/1
+DELETE {{api}}/videos/600066c0cfcada35a94b3406
+
+###
+PUT {{api}}/videos/600069655d82e239e845bc10
+Content-Type: application/json
+
+{
+	"title": "Let it happen"
+}
 
 ###
 POST {{api}}/videos
 Content-Type: application/json
 
 {
-	"title": "fazt video",
-	"description": "a fazt video",
-	"url": "https://www.youtube.com/watch?v=_RZ-T6TxP7w&t=2604s"
+	"title": "Let it happen",
+	"description": "A tame impala song",
+	"url": "https://www.youtube.com/watch?v=NMRhx71bGo4"
 }
 
 ###
