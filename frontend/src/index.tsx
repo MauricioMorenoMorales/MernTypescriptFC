@@ -1,18 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './index.css'
 import reportWebVitals from './reportWebVitals'
 import VideoList from './components/videos/VideoList'
 import VideoForm from './components/videos/VideoForm'
+import Navbar from './components/navbar/Navbar'
+
+import 'bootswatch/dist/flatly/bootstrap.min.css'
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<Switch>
-				<Route exact path="/" component={VideoList} />
-				<Route path="/new-video" component={VideoForm} />
-			</Switch>
+			<Navbar />
+			<div className="container p-4">
+				<Switch>
+					<Route exact path="/" component={VideoList} />
+					<Route path="/new-video" component={VideoForm} />
+				</Switch>
+			</div>
 		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById('root'),
