@@ -7,6 +7,18 @@ export const getVideos = async () => {
 	return await axios.get<Video[]>(`${API}/videos`)
 }
 
+export const getVideo = async (id: string) => {
+	return await axios.get<Video>(`${API}/videos/${id}`)
+}
+
 export const createVideos = async (video: Video) => {
 	return await axios.post(`${API}/videos`, video)
+}
+
+export const updateVideo = async (id: string, video: Video) => {
+	return await axios.put(`${API}/videos/${id}`, video)
+}
+
+export const deleteVideo = async (id: string) => {
+	return await axios.delete(`${API}/videos/${id}`)
 }
