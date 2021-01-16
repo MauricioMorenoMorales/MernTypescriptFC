@@ -1,5 +1,9 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Video } from './Video'
+import { toast } from 'react-toastify'
+
+import * as VideoService from './VideoService'
 
 const VideoForm = () => {
 	const [video, setVideo] = useState<Video>({
@@ -8,8 +12,18 @@ const VideoForm = () => {
 		url: '',
 	})
 
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const history = useHistory()
+
+	const handleInputChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
 		setVideo({ ...video, [e.target.name]: e.target.value })
+	}
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		await VideoService.createVideos(video)
+		toast.success('New video added')
 	}
 	return (
 		<div className="row">
@@ -17,7 +31,7 @@ const VideoForm = () => {
 				<div className="card">
 					<div className="card-body">
 						<h3>newVideo</h3>
-						<form action="">
+						<form action="" onSubmit={handleSubmit}>
 							<div className="form-group">
 								<input
 									type="text"
@@ -34,6 +48,7 @@ const VideoForm = () => {
 									name="url"
 									placeholder="https://somesite.com"
 									className="form-control"
+									onChange={handleInputChange}
 								/>
 							</div>
 							<div className="form-group">
@@ -42,6 +57,7 @@ const VideoForm = () => {
 									className="form-control"
 									placeholder="Write a description"
 									rows={3}
+									onChange={handleInputChange}
 								></textarea>
 							</div>
 							<button className="btn btn-primary">Create Video</button>
