@@ -24,11 +24,6 @@ const Navbar = () => {
 						<div className="collapse navbar-collapse" id="navbarNav">
 							<ul className="navbar-nav ml-auto">
 								<li className="nav-item">
-									<Link className="nav-link" to="#">
-										My videos
-									</Link>
-								</li>
-								<li className="nav-item">
 									<Link className="nav-link" to="/new-video">
 										Create a new Video
 									</Link>

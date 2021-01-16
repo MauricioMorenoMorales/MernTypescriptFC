@@ -1,18 +1,21 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+//import { useHistory, useParams } from 'react-router-dom'
 import { Video } from './Video'
 import { toast } from 'react-toastify'
 
 import * as VideoService from './VideoService'
 
 const VideoForm = () => {
-	const [video, setVideo] = useState<Video>({
+	const initialState = {
 		title: '',
 		description: '',
 		url: '',
-	})
+	}
 
-	const history = useHistory()
+	const [video, setVideo] = useState<Video>(initialState)
+
+	//const history = useHistory()
+	//	const params = useParams()
 
 	const handleInputChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -24,6 +27,8 @@ const VideoForm = () => {
 		e.preventDefault()
 		await VideoService.createVideos(video)
 		toast.success('New video added')
+		setVideo(initialState)
+		//history.push('/')
 	}
 	return (
 		<div className="row">
@@ -40,6 +45,7 @@ const VideoForm = () => {
 									className="form-control"
 									autoFocus
 									onChange={handleInputChange}
+									value={video.title}
 								/>
 							</div>
 							<div className="form-group">
@@ -49,6 +55,7 @@ const VideoForm = () => {
 									placeholder="https://somesite.com"
 									className="form-control"
 									onChange={handleInputChange}
+									value={video.url}
 								/>
 							</div>
 							<div className="form-group">
@@ -58,6 +65,7 @@ const VideoForm = () => {
 									placeholder="Write a description"
 									rows={3}
 									onChange={handleInputChange}
+									value={video.description}
 								></textarea>
 							</div>
 							<button className="btn btn-primary">Create Video</button>

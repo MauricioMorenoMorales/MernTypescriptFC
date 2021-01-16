@@ -4,7 +4,7 @@ import { Video } from './Video'
 const API = 'http://localhost:4000'
 
 export const getVideos = async () => {
-	return await axios.get(`${API}/videos`)
+	return await axios.get<Video[]>(`${API}/videos`)
 }
 
 export const createVideos = async (video: Video) => {
